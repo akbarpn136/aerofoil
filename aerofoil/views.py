@@ -1,6 +1,4 @@
-import json
-
-from django.http import HttpResponse
+from django.http import JsonResponse
 from django.views import View
 
 
@@ -10,6 +8,4 @@ class AerofoilView(View):
     }
 
     def get(self, req):
-        return HttpResponse(
-            json.dumps(self.info)
-        )
+        return JsonResponse(self.info)
