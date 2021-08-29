@@ -13,7 +13,8 @@
             round
             :color="route.name === 'utama' ? 'amber' : 'white'"
             icon="eva-paper-plane-outline"
-            aria-label="Menu"
+            aria-label="Utama"
+            @click="gotoPage('utama')"
           >
             <q-tooltip class="bg-red text-uppercase" :offset="[10, 10]">
               Utama
@@ -26,7 +27,8 @@
             round
             :color="route.name === 'koleksi' ? 'amber' : 'white'"
             icon="eva-layers-outline"
-            aria-label="Menu"
+            aria-label="Koleksi"
+            @click="gotoPage('koleksi')"
           >
             <q-tooltip class="bg-red text-uppercase" :offset="[10, 10]">
               Koleksi
@@ -39,7 +41,8 @@
             round
             :color="route.name === 'informasi' ? 'amber' : 'white'"
             icon="eva-info-outline"
-            aria-label="Menu"
+            aria-label="informasi"
+            @click="gotoPage('informasi')"
           >
             <q-tooltip class="bg-red text-uppercase" :offset="[10, 10]">
               Informasi
