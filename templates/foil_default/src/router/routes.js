@@ -1,13 +1,11 @@
+import {Utama} from "src/router/utama/utama_route"
+import {Koleksi} from "src/router/koleksi/koleksi_route"
+import {Informasi} from "src/router/informasi/informasi_route"
 
 const routes = [
-  {
-    path: '/',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/utama/Utama.vue'), name: "utama" }
-    ]
-  },
-
+  Utama,
+  Koleksi,
+  Informasi,
   // Always leave this as last one,
   // but you can also remove it
   {
