@@ -52,8 +52,8 @@
       </q-toolbar>
     </q-header>
 
-    <q-page-container>
-      <router-view />
+    <q-page-container class="row justify-center">
+      <router-view class="col-7" />
     </q-page-container>
   </q-layout>
 </template>
