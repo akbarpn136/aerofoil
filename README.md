@@ -4,6 +4,7 @@ Repositori pengembangan aplikasi riset aerofoil. Selama pengembangan aplikasi, d
 
 ```text
 DEBUG=dev
+PAGE_SIZE=100
 SECRET_KEY=s3cr3t
 ```
 
