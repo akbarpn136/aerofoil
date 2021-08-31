@@ -3,7 +3,9 @@ import cv2
 import skfmm
 import base64
 import numpy as np
+from django.http import JsonResponse
 from matplotlib import pyplot as plt
+from rest_framework import status
 
 
 class AirfoilGenerator:
@@ -33,3 +35,43 @@ class AirfoilGenerator:
         plt.savefig(flike)
 
         return base64.b64encode(flike.getvalue()).decode()
+
+    @staticmethod
+    def parse_input(points_input, angle, pixels):
+        try:
+            points = points_input.strip().splitlines()
+            coords = [{
+                "x": float(point.split(maxsplit=1)[0]),
+                "y": float(point.split(maxsplit=1)[1])
+            } for point in points]
+
+            img = AirfoilGenerator.sdf_image(angle, pixels, 2, coords)
+
+            return JsonResponse(
+                {"data": img},
+                status=status.HTTP_200_OK
+            )
+
+        except IndexError as err:
+            return JsonResponse(
+                {"data": str(err)},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        except TypeError as err:
+            return JsonResponse(
+                {"data": str(err)},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        except AttributeError as err:
+            return JsonResponse(
+                {"data": str(err)},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        except ValueError as err:
+            return JsonResponse(
+                {"data": str(err)},
+                status=status.HTTP_400_BAD_REQUEST
+            )
