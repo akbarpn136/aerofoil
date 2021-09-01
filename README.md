@@ -7,6 +7,7 @@ DEBUG=dev                 #rest-api
 PAGE_SIZE=100             #rest-api
 SECRET_KEY=s3cr3t         #rest-api
 REST_HOST=localhost:8000  #ui
+SOURCE_CODE=github.com    #ui
 ```
 
 Jalankan perintah ```pip install -r requirements.txt``` untuk menambahkan _package dependencies_
