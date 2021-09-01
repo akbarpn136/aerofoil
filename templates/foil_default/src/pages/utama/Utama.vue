@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <div class="text-center">
+    <div class="text-center text-uppercase">
       <h3 class="overflow-hidden-y">Pencitraan Airfoil</h3>
     </div>
 
