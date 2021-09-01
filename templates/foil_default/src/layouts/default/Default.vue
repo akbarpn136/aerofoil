@@ -42,7 +42,7 @@
             :color="route.name === 'informasi' ? 'amber' : 'white'"
             icon="eva-info-outline"
             aria-label="informasi"
-            @click="gotoPage('informasi')"
+            @click="tunjukInformasi"
           >
             <q-tooltip class="bg-red text-uppercase" :offset="[10, 10]">
               Informasi
@@ -55,6 +55,33 @@
     <q-page-container class="row justify-center">
       <router-view class="col-7" />
     </q-page-container>
+
+    <q-dialog v-model="informasi" persistent>
+      <q-card>
+        <q-bar class="bg-amber">
+          <div class="">💡 Informasi Aerofoil</div>
+
+          <q-space />
+
+          <q-btn dense flat icon="eva-close-outline" v-close-popup>
+            <q-tooltip>Close</q-tooltip>
+          </q-btn>
+        </q-bar>
+
+        <q-card-section>
+          Aplikasi Aerofoil ✈️ dikembangkan dengan sepenuh ❤️ memanfaatkan teknologi <i>Open Source</i> untuk mendukung
+          riset tentang <b>Prediksi Distribusi Tekanan Udara di Permukaan Airfoil dengan Variasi Sudut Serang melalui
+          Convolutional Neural Network</b>.🤖
+        </q-card-section>
+
+        <q-card-section>
+          <q-btn unelevated color="primary"
+                 label="Source Code"
+                 @click="goToExternal('repo')"
+          />
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </q-layout>
 </template>
 
