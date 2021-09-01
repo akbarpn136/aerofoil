@@ -13,7 +13,13 @@ class AirfoilGenerator:
     def _rotate_img(draw, angle):
         center = (draw.shape[0] // 2, draw.shape[1] // 2)
         rotate_matrix = cv2.getRotationMatrix2D(center=center, angle=-angle, scale=1)
-        rotated_image = cv2.warpAffine(src=draw, M=rotate_matrix, dsize=(draw.shape[1], draw.shape[0]))
+        rotated_image = cv2.warpAffine(
+            src=draw,
+            M=rotate_matrix,
+            dsize=(draw.shape[1], draw.shape[0]),
+            borderMode=cv2.BORDER_CONSTANT,
+            borderValue=-1
+        )
 
         return rotated_image
 
@@ -42,7 +48,7 @@ class AirfoilGenerator:
 
         if gen_sdf:
             colormap = "plasma"
-            phi = skfmm.distance(phi, dx=1)
+            phi = skfmm.distance(phi, dx=1, order=2)
         else:
             colormap = "gray"
 
