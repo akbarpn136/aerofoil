@@ -41,7 +41,7 @@ class AirfoilGenerator:
 
         airfoils = airfoils.reshape((-1, 1, 2))
         cv2.fillPoly(phi, [airfoils], (255, 255, 255), lineType=cv2.LINE_AA)
-        cv2.flip(phi, 0)
+        phi = cv2.flip(phi, 0)
         phi = AirfoilGenerator._rotate_img(phi, angle)
         plt.axis('off')
         flike = io.BytesIO()
