@@ -97,4 +97,3 @@ class AirfoilGenerator:
                 {"data": str(err)},
                 status=status.HTTP_400_BAD_REQUEST
             )
-
