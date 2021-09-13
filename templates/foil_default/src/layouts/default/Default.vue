@@ -53,7 +53,7 @@
     </q-header>
 
     <q-page-container class="row justify-center">
-      <router-view class="col-7" />
+      <router-view :class="route.name === 'koleksi' ? 'col-10' : 'col-7'" />
     </q-page-container>
 
     <q-dialog v-model="informasi" persistent>
