@@ -22,6 +22,6 @@ from aerofoil.views import AerofoilView
 
 urlpatterns = [
     path("", AerofoilView.as_view()),
-    path("admin/", admin.site.urls),
+    path("aeromin/", admin.site.urls),
     path("flow/", include("flow.urls"))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
