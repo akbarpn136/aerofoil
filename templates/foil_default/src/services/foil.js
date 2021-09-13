@@ -23,3 +23,33 @@ export const foilService = async (form, store, {sudut, koordinat}) => {
     })
   }
 }
+
+export const koleksiAirfoilService = async (store, {page}) => {
+  try {
+    const res = await store.dispatch("foil/koleksiAirfoilAction", {page})
+
+    if (page === 1) store.commit("foil/resetKoleksiAirfoilMutation")
+
+    store.commit("foil/koleksiAirfoilMutation", {
+      count: res.data.count,
+      next: res.data.next,
+      previous: res.data.previous,
+      results: res.data.results
+    })
+  } catch (err) {
+    let message
+
+    if (err.response.data) {
+      message = err.response.data.data
+    }
+
+    else {
+      message = err.message
+    }
+
+    Notify.create({
+      type: "negative",
+      message: message
+    })
+  }
+}
