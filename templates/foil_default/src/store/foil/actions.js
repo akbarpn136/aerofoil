@@ -6,3 +6,11 @@ export async function foilAction (ctx, {sudut, koordinat}) {
     coord: koordinat
   })
 }
+
+export async function koleksiAirfoilAction (ctx, {page}) {
+  return api.get("flow/api/koleksi", {
+    params: {
+      page: page ? page : 1
+    }
+  })
+}
