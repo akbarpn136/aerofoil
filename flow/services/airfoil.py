@@ -1,8 +1,11 @@
 import io
+import os
+
 import cv2
 import skfmm
 import base64
 import numpy as np
+from django.conf import settings
 from rest_framework import status
 from matplotlib import pyplot as plt
 from django.http import JsonResponse
@@ -24,7 +27,9 @@ class AirfoilGenerator:
         return rotated_image
 
     @staticmethod
-    def sdf_image(angle: int, resolution: int, dimension: int, points, gen_sdf: bool = True):
+    def sdf_image(angle: int, resolution: int,
+                  dimension: int, points, filename: str = None,
+                  gen_sdf: bool = True, save: bool = False):
         offset_y = resolution // 2
         phi = -1 * np.ones((resolution, resolution, 1), dtype="uint8")
         airfoils = np.empty((0, dimension), int)
@@ -44,7 +49,6 @@ class AirfoilGenerator:
         phi = cv2.flip(phi, 0)
         phi = AirfoilGenerator._rotate_img(phi, angle)
         plt.axis('off')
-        flike = io.BytesIO()
 
         if gen_sdf:
             colormap = "plasma"
@@ -53,9 +57,18 @@ class AirfoilGenerator:
             colormap = "gray"
 
         plt.imshow(phi, cmap=colormap)
-        plt.savefig(flike, bbox_inches="tight", pad_inches=0)
+        if save:
+            name = filename if filename else "airfoil"
+            curr_dir = settings.PUBLIC_DIR
+            save_path = os.path.join(curr_dir, "public", "media", "airfoil", f"{name}.png")
+            plt.savefig(save_path, bbox_inches="tight", pad_inches=0)
 
-        return base64.b64encode(flike.getvalue()).decode()
+            return None
+        else:
+            flike = io.BytesIO()
+            plt.savefig(flike, bbox_inches="tight", pad_inches=0)
+
+            return base64.b64encode(flike.getvalue()).decode()
 
     @staticmethod
     def parse_input(points_input, angle, pixels):
@@ -66,8 +79,8 @@ class AirfoilGenerator:
                 "y": float(point.split(maxsplit=1)[1])
             } for point in points]
 
-            ori = AirfoilGenerator.sdf_image(angle, pixels, 2, coords, False)
-            img = AirfoilGenerator.sdf_image(angle, pixels, 2, coords, True)
+            ori = AirfoilGenerator.sdf_image(angle, pixels, 2, coords, gen_sdf=False)
+            img = AirfoilGenerator.sdf_image(angle, pixels, 2, coords, gen_sdf=True)
 
             return JsonResponse(
                 {"data": {"ori": ori, "sdf": img}},

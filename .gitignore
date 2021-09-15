@@ -131,6 +131,7 @@ dmypy.json
 # Editor
 .vscode
 .idea
+*.csv
 
 # Quasar
 store-flag.d.ts

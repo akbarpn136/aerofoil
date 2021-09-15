@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <q-markup-table flat bordered class="q-mt-lg">
+    <q-markup-table flat bordered class="q-my-lg">
       <thead class="bg-green-5">
         <tr>
           <th colspan="8">
@@ -19,13 +19,14 @@
           <th class="text-center">Cl</th>
           <th class="text-center">Cd</th>
           <th class="text-center">Cm</th>
-          <th class="text-right">Cp</th>
+          <th class="text-center">Cp</th>
         </tr>
       </thead>
       <tbody class="bg-grey-3">
         <tr v-if="koleksiAirfoil.count === 0">
-          <td class="text-center" colspan="7">Data belum ada</td>
+          <td class="text-center" colspan="8">Data belum ada</td>
         </tr>
+
         <tr v-for="koleksi in koleksiAirfoil.results"
             :key="koleksi.id"
             v-else
@@ -42,18 +43,51 @@
           <td class="text-center">{{ koleksi.cl }}</td>
           <td class="text-center">{{ koleksi.cd }}</td>
           <td class="text-center">{{ koleksi.cm }}</td>
-          <td class="text-right">
-            upper: {{ koleksi.cp_upper }} <br />
-            lower: {{ koleksi.cp_lower }}
+          <td class="text-center">
+            <q-btn outline color="black" label="Lihat" @click="onLihatCp(koleksi.id)" />
           </td>
         </tr>
       </tbody>
     </q-markup-table>
 
+    <q-dialog v-model="tunjukCp" persistent>
+      <q-card style="width: 420px;">
+        <q-bar>
+          <q-icon name="eva-archive-outline" />
+          <div>Distribusi Koefisien Tekanan</div>
+
+          <q-space />
+
+          <q-btn dense flat icon="close" v-close-popup>
+            <q-tooltip>Close</q-tooltip>
+          </q-btn>
+        </q-bar>
+
+        <q-card-section>
+
+          <q-markup-table separator="vertical">
+            <thead>
+              <tr>
+                <th class="text-center">x</th>
+                <th class="text-center">Cp</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(cp, i) in press.cp" :key="cp">
+                <td class="text-center">{{ press.x[i] }}</td>
+                <td class="text-center">{{ cp }}</td>
+              </tr>
+            </tbody>
+          </q-markup-table>
+
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+
     <q-btn unelevated
            color="blue"
            label="Muat Data"
-           class="q-my-lg"
+           class="q-mb-lg"
            v-if="koleksiAirfoil.next"
     />
   </q-page>
