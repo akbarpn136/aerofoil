@@ -1,13 +1,11 @@
 from django.db import models
-from django.contrib.postgres.fields import ArrayField
 
 
 class KoleksiAirfoil(models.Model):
     nama = models.CharField(max_length=255)
     re = models.FloatField()
     alpha = models.FloatField()
-    x = ArrayField(models.FloatField(), default=list)
-    cp = ArrayField(models.FloatField(), default=list)
+    cpx = models.JSONField(default=dict)
     cl = models.FloatField()
     cd = models.FloatField()
     cm = models.FloatField()
