@@ -4,6 +4,7 @@ from django.db import models
 class KoleksiAirfoil(models.Model):
     nama = models.CharField(max_length=255)
     re = models.FloatField()
+    mach = models.FloatField(default=0.1)
     alpha = models.FloatField()
     cpx = models.JSONField(default=dict)
     cl = models.FloatField()
