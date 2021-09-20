@@ -1,6 +1,8 @@
 import os
 
 import pandas as pd
+import multiprocessing
+from functools import partial
 from django.conf import settings
 from django.core.management import BaseCommand, CommandError
 
@@ -37,9 +39,16 @@ class Command(BaseCommand):
             df.columns = ["x", "y"]
             coord_points = df.to_dict("records")
 
-            for al in alpha:
-                AirfoilGenerator.sdf_image(al, 128, 2, coord_points, f"{airfoil}_{al}", gen_sdf=True, save=True)
+            # Generate many SDF for airfoil using multiprocessing
+            mpool = multiprocessing.Pool()
+            first_arg = partial(work_on_sdf, points=coord_points, airfoil=airfoil)
+            mpool.map(first_arg, alpha)
+
         except FileNotFoundError as err:
             raise CommandError(str(err))
 
-        self.stdout.write(self.style.SUCCESS('Successfully closed poll "%s"' % coord_file))
+        self.stdout.write(self.style.SUCCESS("Successfully generate SDF."))
+
+
+def work_on_sdf(alpha, points, airfoil):
+    AirfoilGenerator.sdf_image(alpha, 128, 2, points, f"{airfoil}_{alpha}", gen_sdf=True, save=True)
