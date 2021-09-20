@@ -24,12 +24,17 @@ class Command(BaseCommand):
                             metavar="ReynoldNumber",
                             type=float,
                             help="Reynold number ex: 123456.789")
+        parser.add_argument("ma",
+                            metavar="MachNumber",
+                            type=float,
+                            help="Mach number ex: 0.1")
 
     def handle(self, *args, **options):
         curr_dir = settings.BASE_DIR
         name = options.get("filename")
         airfoil = options.get("airfoil")
         re = options.get("re")
+        ma = options.get("ma")
         aero_file = os.path.join(curr_dir, name)
         username = os.environ['DB_USERNAME']
         password = os.environ['DB_PASSWORD']
@@ -48,6 +53,7 @@ class Command(BaseCommand):
             df["dibuat"] = timezone.now()
             df["diubah"] = timezone.now()
             df["cpx"] = read_cp()
+            df["mach"] = ma
 
             df.to_sql("flow_koleksiairfoil", engine, if_exists="append", index=False)
 
