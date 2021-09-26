@@ -1,0 +1,24 @@
+\input{components/header}
+\input{components/package}
+
+\begin{document}
+  \begin{frame}
+    \maketitle
+  \end{frame}
+  \setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
+  \input{sections/toc}
+  \input{sections/intro}
+  \input{sections/metodologi}
+
+  \begin{frame}[focus]
+    Terima Kasih
+  \end{frame}
+
+  \appendix
+  \begin{frame}{Referensi}
+    \nocite{*}
+    \bibliography{bibfile}
+    \bibliographystyle{apalike}
+  \end{frame}
+\end{document}
