@@ -1,6 +1,6 @@
 \section{Metodologi Penelitian}
 \subsection{Pencitraan Airfoil}
-\begin{frame}
+\begin{frame}{Pencitraan Airfoil}
   Pencitraan airfoil dilakukan melalui pengolahan citra dengan \textit{OpenCV} untuk mengekstrak/mendapatkan suatu pola tertentu \cite{druzhkov2011new}.\\~\\
   \pause
 
@@ -8,12 +8,12 @@
 \end{frame}
 
 \subsection{Peningkatan Citra Airfoil}
-\begin{frame}
-    \begin{columns}[t]% instead of multicols
+\begin{frame}{Peningkatan Citra Airfoil}
+  \begin{columns}[t]
     \begin{column}{.5\linewidth}
       \begin{figure}[h]
         \centering
-        \includegraphics[width=0.5\linewidth]{statics/biner}
+        \includegraphics[width=0.35\linewidth]{statics/biner}
         \caption{Citra Biner}
         \label{fig:biner}
       \end{figure}
@@ -21,7 +21,7 @@
     \begin{column}{.5\linewidth}
       \begin{figure}[h]
         \centering
-        \includegraphics[width=0.5\linewidth]{statics/sdf}
+        \includegraphics[width=0.35\linewidth]{statics/sdf}
         \caption{Citra SDF}
         \label{fig:biner}
       \end{figure}
@@ -36,12 +36,12 @@
 \end{frame}
 
 \subsection{Aerodinamika Airfoil}
-\begin{frame}
+\begin{frame}{Aerodinamika Airfoil}
   Disamping data SDF airfoil, diperlukan data aerodinamika airfoil.\\~\\
   \pause
 
   Data aerodinamika dapat diperoleh baik melalui pengujian di terowongan angin maupun \textit{CFD}. Penelitian ini menggunakan \textit{CFD} karena lebih murah \cite{eppler2012airfoil}.\\~\\
   \pause
 
-  Banyak \textit{CFD Solver} yang disediakan dalam melakukan analisis aerodinamika airfoil \cite{gunel2016comparison}.
+  Banyak \textit{CFD Solver} yang disediakan dalam melakukan analisis aerodinamika airfoil \cite{gunel2016comparison}. Penelitian ini menggunakan \textit{XFLR5} \cite{marten2010integration}.
 \end{frame}
