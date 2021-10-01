@@ -73,9 +73,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(cp, i) in press.cp" :key="cp">
-                <td class="text-center">{{ press.x[i] }}</td>
-                <td class="text-center">{{ cp }}</td>
+              <tr v-for="p in press.cpx" :key="p">
+                <td class="text-center">{{ p.x }}</td>
+                <td class="text-center">{{ p.cpi }}</td>
               </tr>
             </tbody>
           </q-markup-table>
