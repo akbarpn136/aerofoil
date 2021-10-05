@@ -51,4 +51,4 @@ class Command(BaseCommand):
 
 
 def work_on_sdf(alpha, points, airfoil):
-    AirfoilGenerator.sdf_image(alpha, 128, 2, points, f"{airfoil}_{alpha}", gen_sdf=True, save=True)
+    AirfoilGenerator.sdf_image(alpha, 1024, 2, points, f"{airfoil}_{alpha}", gen_sdf=True, save=True)
