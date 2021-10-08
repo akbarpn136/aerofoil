@@ -12,14 +12,14 @@ class Command(BaseCommand):
     help = "Automatically insert airfoil aerodynamics into database."
 
     def add_arguments(self, parser):
-        parser.add_argument("filename",
-                            metavar="Filename",
-                            type=str,
-                            help="Airfoil aerodynamic file")
         parser.add_argument("airfoil",
                             metavar="AirfoilName",
                             type=str,
                             help="Airfoil name code, ex: naca2412")
+        parser.add_argument("filename",
+                            metavar="Filename",
+                            type=str,
+                            help="Airfoil aerodynamic file")
         parser.add_argument("re",
                             metavar="ReynoldNumber",
                             type=float,
@@ -55,7 +55,7 @@ class Command(BaseCommand):
             df["cpx"] = read_cp()
             df["mach"] = ma
 
-            df.to_sql("flow_koleksiairfoil", engine, if_exists="append", index=False)
+            # df.to_sql("flow_koleksiairfoil", engine, if_exists="append", index=False)
 
             self.stdout.write(self.style.SUCCESS("Successfully insert to database."))
         except ValueError as err:
@@ -71,6 +71,7 @@ def read_cp():
         df = pd.read_fwf(os.path.join(curr_dir, "cp", cp), skiprows=6, header=None)
         df.columns = ["x", "cpi", "cpv", "qi", "qv"]
         df = df[["x", "cpi"]]
+        print(df.x.count())
         koleksi.append(json.dumps(df.to_dict("records")))
 
     return koleksi
