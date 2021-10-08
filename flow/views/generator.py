@@ -15,7 +15,7 @@ class GenerateSDF(APIView):
         self.factor = 0.7
 
     def post(self, request):
-        pixels = self.request.query_params.get("resolution", 128)
+        pixels = self.request.query_params.get("resolution", 1024)
         parse_points = JSONParser().parse(self.request)
         serializer = CoordinateSerializer(data=parse_points)
 

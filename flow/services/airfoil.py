@@ -61,12 +61,12 @@ class AirfoilGenerator:
             name = filename if filename else "airfoil"
             curr_dir = settings.PUBLIC_DIR
             save_path = os.path.join(curr_dir, "public", "media", "airfoil", f"{name}.png")
-            plt.savefig(save_path, bbox_inches="tight", pad_inches=0)
+            plt.savefig(save_path, bbox_inches="tight", pad_inches=0, dpi=34.7)
 
             return None
         else:
             flike = io.BytesIO()
-            plt.savefig(flike, bbox_inches="tight", pad_inches=0)
+            plt.savefig(flike, bbox_inches="tight", pad_inches=0, dpi=34.7)
 
             return base64.b64encode(flike.getvalue()).decode()
 
