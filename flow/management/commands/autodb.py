@@ -55,7 +55,7 @@ class Command(BaseCommand):
             df["cpx"] = read_cp()
             df["mach"] = ma
 
-            # df.to_sql("flow_koleksiairfoil", engine, if_exists="append", index=False)
+            df.to_sql("flow_koleksiairfoil", engine, if_exists="append", index=False)
 
             self.stdout.write(self.style.SUCCESS("Successfully insert to database."))
         except ValueError as err:
@@ -77,7 +77,6 @@ def read_cp():
         x = np.linspace(0, df.x.count() - 1, total_cp, dtype=np.int)
         selected = df.index.isin(x)
         df = df[selected]
-        print(df.x.count())
         koleksi.append(json.dumps(df.to_dict("records")))
 
     return koleksi
