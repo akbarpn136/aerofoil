@@ -63,6 +63,9 @@ class Command(BaseCommand):
 
 
 def read_cp():
+    import numpy as np
+
+    total_cp = 48
     curr_dir = settings.BASE_DIR
     cp_file = os.path.join(curr_dir, "cp")
     koleksi = []
@@ -71,6 +74,9 @@ def read_cp():
         df = pd.read_fwf(os.path.join(curr_dir, "cp", cp), skiprows=6, header=None)
         df.columns = ["x", "cpi", "cpv", "qi", "qv"]
         df = df[["x", "cpi"]]
+        x = np.linspace(0, df.x.count() - 1, total_cp, dtype=np.int)
+        selected = df.index.isin(x)
+        df = df[selected]
         print(df.x.count())
         koleksi.append(json.dumps(df.to_dict("records")))
 
