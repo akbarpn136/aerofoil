@@ -12,14 +12,14 @@ class Command(BaseCommand):
     help = "Automatically insert airfoil aerodynamics into database."
 
     def add_arguments(self, parser):
-        parser.add_argument("filename",
-                            metavar="Filename",
-                            type=str,
-                            help="Airfoil aerodynamic file")
         parser.add_argument("airfoil",
                             metavar="AirfoilName",
                             type=str,
                             help="Airfoil name code, ex: naca2412")
+        parser.add_argument("filename",
+                            metavar="Filename",
+                            type=str,
+                            help="Airfoil aerodynamic file")
         parser.add_argument("re",
                             metavar="ReynoldNumber",
                             type=float,
@@ -63,6 +63,9 @@ class Command(BaseCommand):
 
 
 def read_cp():
+    import numpy as np
+
+    total_cp = 48
     curr_dir = settings.BASE_DIR
     cp_file = os.path.join(curr_dir, "cp")
     koleksi = []
@@ -71,6 +74,9 @@ def read_cp():
         df = pd.read_fwf(os.path.join(curr_dir, "cp", cp), skiprows=6, header=None)
         df.columns = ["x", "cpi", "cpv", "qi", "qv"]
         df = df[["x", "cpi"]]
+        x = np.linspace(0, df.x.count() - 1, total_cp, dtype=np.int)
+        selected = df.index.isin(x)
+        df = df[selected]
         koleksi.append(json.dumps(df.to_dict("records")))
 
     return koleksi

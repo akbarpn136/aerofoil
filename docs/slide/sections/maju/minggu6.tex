@@ -22,6 +22,46 @@
   \end{columns}
 \end{frame}
 
+\begin{frame}{Koreksi Kualitas Airfoil}
+  Pada minggu ke-7 ini, kualitas citra airfoil ditingkatkan lagi agar kualitas SDF juga lebih baik\footnote{\url{https://github.com/akbarpn136/aerofoil/commit/f20639a210a27dbcdd9aabcf3cf07b2ca2223d0d}}.
+
+  \pause
+
+  \begin{columns}[t]
+    \begin{column}{.25\linewidth}
+      \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\linewidth]{statics/airfoil_low.png}
+        \caption{Biner low}
+      \end{figure}
+    \end{column}
+
+    \begin{column}{.25\linewidth}
+      \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\linewidth]{statics/airfoil_sdf_low.png}
+        \caption{SDF low}
+      \end{figure}
+    \end{column}
+
+    \begin{column}{.25\linewidth}
+      \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\linewidth]{statics/airfoil_high.png}
+        \caption{Biner high}
+      \end{figure}
+    \end{column}
+
+    \begin{column}{.25\linewidth}
+      \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\linewidth]{statics/airfoil_sdf_high.png}
+        \caption{SDF High}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
 \subsection{Telaah Literatur}
 
 \begin{frame}{Literatur Berkaitan XFLR5}
@@ -94,6 +134,37 @@
       \begin{block}{\text{XFOIL vs CFD performance predictions}}
         \cite{morgado2016xfoil} Perbandingan antara data pengujian dengan prediksi dari \textit{solver CFD} lainnya, \texttt{XFOIL} tetap menjadi alat perancangan dan analisis airfoil yang baik.
       \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Uji Perbandingan}
+  Melakukan perbandingan \texttt{XFLR5} dengan \texttt{airfoiltools}\footnote{\url{http://www.airfoiltools.com/airfoil/details?airfoil=n0009sm-il}}.\\~\\
+  \pause
+
+  Model airfoil \texttt{NACA 0009}.
+  \pause
+
+  \begin{columns}[t]
+    \begin{column}{.33\linewidth}
+      \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\linewidth]{statics/plot_naca0009_cla}
+      \end{figure}
+    \end{column}
+
+    \begin{column}{.33\linewidth}
+      \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\linewidth]{statics/plot_naca0009_cda}
+      \end{figure}
+    \end{column}
+
+    \begin{column}{.33\linewidth}
+      \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\linewidth]{statics/plot_naca0009_cma}
+      \end{figure}
     \end{column}
   \end{columns}
 \end{frame}

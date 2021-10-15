@@ -1,5 +1,16 @@
 <template>
   <q-page>
+     <q-select outlined clearable
+               class="q-mt-lg"
+               v-model="seleksiNamaAirfoil"
+               :options="pilihan_nama_airfoil"
+               :loading="loading_seleksi"
+               label="Kode Airfoil"
+               model-value=""
+               style="max-width: 300px"
+               @virtual-scroll="onSelekScroll"
+     />
+    <div class="q-mt-lg full-width" id="plotplot"></div>
     <q-markup-table flat bordered class="q-my-lg">
       <thead class="bg-green-5">
         <tr>
@@ -84,6 +95,7 @@
       </q-card>
     </q-dialog>
 
+    <!--TODO: Fungsi muat data airfoil-->
     <q-btn unelevated
            color="blue"
            label="Muat Data"
