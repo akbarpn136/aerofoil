@@ -7,10 +7,12 @@ export async function foilAction (ctx, {sudut, koordinat}) {
   })
 }
 
-export async function koleksiAirfoilAction (ctx, {page}) {
+export async function koleksiAirfoilAction (ctx, {page, airfoil, unik}) {
   return api.get("flow/api/koleksi", {
     params: {
-      page: page ? page : 1
+      page: page ? page : 1,
+      airfoil: airfoil ? airfoil : null,
+      unik: unik ? unik : null,
     }
   })
 }
