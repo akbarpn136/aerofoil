@@ -67,6 +67,9 @@ export default defineComponent({
         nama_airfoil.value = val
         await koleksiAirfoilService(store, { page: 1, airfoil: val })
         koleksiAirfoil.value = store.getters["foil/koleksiAirfoilGetter"]
+
+        if (val) await onLihatAero(val)
+        else Plotly.purge("plotplot")
       }
     })
 
@@ -100,7 +103,6 @@ export default defineComponent({
       press.value = koleksiAirfoil.value.results.filter(airfoil => airfoil.id === id)[0]
     }
 
-    //TODO: Penerapan fungsi plot
     const onLihatAero = async (nama) => {
       await koleksiAirfoilService(store, { page: 1, airfoil: nama })
       aeroKoef.value = store.getters["foil/koleksiAirfoilGetter"]
