@@ -59,7 +59,6 @@ export const namaAirfoilService = async (store, {page, unik}) => {
     const res = await store.dispatch("foil/koleksiAirfoilAction", {page, unik})
 
     if (page === 1) store.commit("foil/resetNamaAirfoilMutation")
-    console.log(res.data.count)
 
     store.commit("foil/namaAirfoilMutation", {
       count: res.data.count,
