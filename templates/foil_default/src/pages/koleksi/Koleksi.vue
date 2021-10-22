@@ -95,12 +95,12 @@
       </q-card>
     </q-dialog>
 
-    <!--TODO: Fungsi muat data airfoil-->
     <q-btn unelevated
            color="blue"
            label="Muat Data"
            class="q-mb-lg"
            v-if="koleksiAirfoil.next"
+           @click="muatData"
     />
   </q-page>
 </template>
