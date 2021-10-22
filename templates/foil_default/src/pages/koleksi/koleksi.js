@@ -20,6 +20,7 @@ export default defineComponent({
     const loading_seleksi = ref(false)
     const halaman_seleksi = ref(1)
     const lastPage_nama = ref(0)
+    const counter_page = ref(1)
     const plot_config = {
       displaylogo: false,
       displayModeBar: false,
@@ -148,6 +149,12 @@ export default defineComponent({
       Plotly.newPlot('plotplot', data, plot_layout, plot_config)
     }
 
+    const muatData = async () => {
+      counter_page.value += 1
+      await koleksiAirfoilService(store, { page: counter_page.value })
+      koleksiAirfoil.value = store.getters["foil/koleksiAirfoilGetter"]
+    }
+
     return {
       press,
       tunjukCp,
@@ -158,6 +165,7 @@ export default defineComponent({
       loading_seleksi,
       seleksiNamaAirfoil,
       pilihan_nama_airfoil,
+      muatData,
       onLihatCp,
       onLihatAero,
       onSelekScroll
