@@ -74,9 +74,20 @@ def read_cp():
         df = pd.read_fwf(os.path.join(curr_dir, "cp", cp), skiprows=6, header=None)
         df.columns = ["x", "cpi", "cpv", "qi", "qv"]
         df = df[["x", "cpi"]]
-        x = np.linspace(0, df.x.count() - 1, total_cp, dtype=np.int)
-        selected = df.index.isin(x)
-        df = df[selected]
-        koleksi.append(json.dumps(df.to_dict("records")))
+        idx = np.linspace(0, (df.x.count() - 1) // 2, total_cp // 2, dtype=np.int)
+
+        upper = df.iloc[:((df.x.count() - 1) // 2) + 1]
+        selected_upper = upper.index.isin(idx)
+        upper = upper[selected_upper]
+
+        lower = df.iloc[(df.x.count() - 1) // 2:]
+        lower = lower.iloc[::-1].reset_index(drop=True)
+        selected_lower = lower.index.isin(idx)
+        lower = lower[selected_lower]
+        lower = lower.iloc[::-1].reset_index(drop=True)
+
+        gabung = pd.concat([upper, lower], ignore_index=True)
+
+        koleksi.append(json.dumps(gabung.to_dict("records")))
 
     return koleksi
