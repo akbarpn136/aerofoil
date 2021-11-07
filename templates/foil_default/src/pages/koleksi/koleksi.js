@@ -27,9 +27,10 @@ export default defineComponent({
       responsive: true
     }
     const plot_layout = {
+      title: "Cl Cd Cm",
       showlegend: false,
       margin: {
-        t: 15,
+        t: 50,
         b: -5,
         l: 50,
         r: 50
@@ -99,9 +100,46 @@ export default defineComponent({
       }
     }
 
+    const hapusPlot = () => {
+      Plotly.purge("plotplot")
+      Plotly.purge("plotplotcp")
+    }
+
     const onLihatCp = (id) => {
+      Plotly.purge("plotplotcp")
       tunjukCp.value = true
-      press.value = koleksiAirfoil.value.results.filter(airfoil => airfoil.id === id)[0]
+      const aero = koleksiAirfoil.value.results.find(airfoil => airfoil.id === id)
+      const alpha = aero["alpha"]
+
+      if (aero) press.value = aero["cpx"]
+      else press.value = []
+
+      const trace = {
+        x: [],
+        y: [],
+        name: "cp",
+        type: 'scatter'
+      }
+
+      press.value.forEach(k => {
+        trace.x.push(k["x"])
+        trace.y.push(k["cpi"])
+      })
+
+      const data = [trace]
+
+      const cplayout = {
+        title: `Distribusi Tekanan Sudut ${alpha}`,
+        xaxis: {
+          title: "x",
+        },
+        yaxis: {
+          title: "cp",
+          autorange: "reversed"
+        }
+      }
+
+      Plotly.newPlot('plotplotcp', data, cplayout, plot_config)
     }
 
     const onLihatAero = async (nama) => {
@@ -166,6 +204,7 @@ export default defineComponent({
       seleksiNamaAirfoil,
       pilihan_nama_airfoil,
       muatData,
+      hapusPlot,
       onLihatCp,
       onLihatAero,
       onSelekScroll
