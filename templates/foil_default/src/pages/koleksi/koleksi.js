@@ -129,10 +129,10 @@ export default defineComponent({
       const cplayout = {
         title: "Distribusi Tekanan",
         xaxis: {
-          title: "alpha",
+          title: "x",
         },
         yaxis: {
-          title: "cl",
+          title: "cp",
           autorange: "reversed"
         }
       }
