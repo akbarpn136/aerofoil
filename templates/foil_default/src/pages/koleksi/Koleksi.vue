@@ -1,16 +1,29 @@
 <template>
   <q-page>
-     <q-select outlined clearable
-               class="q-mt-lg"
-               v-model="seleksiNamaAirfoil"
-               :options="pilihan_nama_airfoil"
-               :loading="loading_seleksi"
-               label="Kode Airfoil"
-               model-value=""
-               style="max-width: 300px"
-               @virtual-scroll="onSelekScroll"
-     />
+     <div class="row items-center q-col-gutter-md q-mt-lg">
+       <div class="col-12 col-md-3">
+         <q-select outlined clearable dense
+                   v-model="seleksiNamaAirfoil"
+                   :options="pilihan_nama_airfoil"
+                   :loading="loading_seleksi"
+                   label="Kode Airfoil"
+                   model-value=""
+                   @virtual-scroll="onSelekScroll"
+         />
+       </div>
+
+       <div class="col-12 col-md-3">
+         <q-btn outline
+                label="Hapus Plot"
+                color="red"
+                @click="hapusPlot"
+         />
+       </div>
+     </div>
+
     <div class="q-mt-lg full-width" id="plotplot"></div>
+    <div class="q-mt-lg full-width" id="plotplotcp"></div>
+
     <q-markup-table flat bordered class="q-my-lg">
       <thead class="bg-green-5">
         <tr>
@@ -61,7 +74,7 @@
       </tbody>
     </q-markup-table>
 
-    <q-dialog v-model="tunjukCp" persistent>
+    <q-dialog v-model="tunjukCp">
       <q-card style="width: 420px;">
         <q-bar>
           <q-icon name="eva-archive-outline" />
@@ -84,7 +97,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="p in press.cpx" :key="p">
+              <tr v-for="p in press" :key="p">
                 <td class="text-center">{{ p.x }}</td>
                 <td class="text-center">{{ p.cpi }}</td>
               </tr>
