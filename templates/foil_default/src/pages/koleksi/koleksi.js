@@ -99,9 +99,45 @@ export default defineComponent({
       }
     }
 
+    const hapusPlot = () => {
+      Plotly.purge("plotplot")
+      Plotly.purge("plotplotcp")
+    }
+
     const onLihatCp = (id) => {
+      Plotly.purge("plotplotcp")
       tunjukCp.value = true
-      press.value = koleksiAirfoil.value.results.filter(airfoil => airfoil.id === id)[0]
+      const aero = koleksiAirfoil.value.results.find(airfoil => airfoil.id === id)
+
+      if (aero) press.value = aero["cpx"]
+      else press.value = []
+
+      const trace = {
+        x: [],
+        y: [],
+        name: "cp",
+        type: 'scatter'
+      }
+
+      press.value.forEach(k => {
+        trace.x.push(k["x"])
+        trace.y.push(k["cpi"])
+      })
+
+      const data = [trace]
+
+      const cplayout = {
+        title: "Distribusi Tekanan",
+        xaxis: {
+          title: "alpha",
+        },
+        yaxis: {
+          title: "cl",
+          autorange: "reversed"
+        }
+      }
+
+      Plotly.newPlot('plotplotcp', data, cplayout, plot_config)
     }
 
     const onLihatAero = async (nama) => {
@@ -166,6 +202,7 @@ export default defineComponent({
       seleksiNamaAirfoil,
       pilihan_nama_airfoil,
       muatData,
+      hapusPlot,
       onLihatCp,
       onLihatAero,
       onSelekScroll
