@@ -27,7 +27,7 @@
     <q-markup-table flat bordered class="q-my-lg">
       <thead class="bg-green-5">
         <tr>
-          <th colspan="8">
+          <th colspan="9">
             <div class="row no-wrap items-center">
               <div class="text-h4 text-white text-uppercase">Daftar Airfoil</div>
             </div>
@@ -37,6 +37,7 @@
           <th class="text-center">Gambar</th>
           <th class="text-left">Nama</th>
           <th class="text-center">Re</th>
+          <th class="text-center">Ma</th>
           <th class="text-center">
             Alpha <span class="text-weight-bold" style="font-size: large">&deg;</span>
           </th>
@@ -63,6 +64,7 @@
           </td>
           <td class="text-left">{{ koleksi.nama }}</td>
           <td class="text-center">{{ koleksi.re }}</td>
+          <td class="text-center">{{ koleksi.mach }}</td>
           <td class="text-center">{{ koleksi.alpha }}</td>
           <td class="text-center">{{ koleksi.cl }}</td>
           <td class="text-center">{{ koleksi.cd }}</td>
