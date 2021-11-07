@@ -27,9 +27,10 @@ export default defineComponent({
       responsive: true
     }
     const plot_layout = {
+      title: "Cl Cd Cm",
       showlegend: false,
       margin: {
-        t: 15,
+        t: 50,
         b: -5,
         l: 50,
         r: 50
@@ -108,6 +109,7 @@ export default defineComponent({
       Plotly.purge("plotplotcp")
       tunjukCp.value = true
       const aero = koleksiAirfoil.value.results.find(airfoil => airfoil.id === id)
+      const alpha = aero["alpha"]
 
       if (aero) press.value = aero["cpx"]
       else press.value = []
@@ -127,7 +129,7 @@ export default defineComponent({
       const data = [trace]
 
       const cplayout = {
-        title: "Distribusi Tekanan",
+        title: `Distribusi Tekanan Sudut ${alpha}`,
         xaxis: {
           title: "x",
         },
