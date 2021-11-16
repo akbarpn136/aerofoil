@@ -123,7 +123,7 @@ export default defineComponent({
 
       press.value.forEach(k => {
         trace.x.push(k["x"])
-        trace.y.push(k["cpi"])
+        trace.y.push(k["cpv"])
       })
 
       const data = [trace]

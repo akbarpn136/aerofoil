@@ -101,7 +101,7 @@
             <tbody>
               <tr v-for="p in press" :key="p">
                 <td class="text-center">{{ p.x }}</td>
-                <td class="text-center">{{ p.cpi }}</td>
+                <td class="text-center">{{ p.cpv }}</td>
               </tr>
             </tbody>
           </q-markup-table>
