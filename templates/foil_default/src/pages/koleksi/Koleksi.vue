@@ -1,7 +1,7 @@
 <template>
   <q-page>
      <div class="row items-center q-col-gutter-md q-mt-lg">
-       <div class="col-12 col-md-3">
+       <div class="col-6 col-md-3">
          <q-select outlined clearable dense
                    v-model="seleksiNamaAirfoil"
                    :options="pilihan_nama_airfoil"
@@ -12,7 +12,7 @@
          />
        </div>
 
-       <div class="col-12 col-md-3">
+       <div class="col-6 col-md-3">
          <q-btn outline
                 label="Hapus Plot"
                 color="red"
