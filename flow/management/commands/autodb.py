@@ -73,7 +73,7 @@ def read_cp():
     for cp in os.listdir(cp_file):
         df = pd.read_fwf(os.path.join(curr_dir, "cp", cp), skiprows=6, header=None)
         df.columns = ["x", "cpi", "cpv", "qi", "qv"]
-        df = df[["x", "cpi"]]
+        df = df[["x", "cpv"]]
         idx = np.linspace(0, (df.x.count() - 1) // 2, total_cp // 2, dtype=np.int)
 
         upper = df.iloc[:((df.x.count() - 1) // 2) + 1]
