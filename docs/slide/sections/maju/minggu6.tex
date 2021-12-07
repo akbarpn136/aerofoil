@@ -23,7 +23,7 @@
 \end{frame}
 
 \begin{frame}{Koreksi Kualitas Airfoil}
-  Pada minggu ke-7 ini, kualitas citra airfoil ditingkatkan lagi agar kualitas SDF juga lebih baik\footnote{\url{https://github.com/akbarpn136/aerofoil/commit/f20639a210a27dbcdd9aabcf3cf07b2ca2223d0d}}.
+  Kualitas citra airfoil ditingkatkan lagi agar kualitas SDF juga lebih baik\footnote{\url{https://github.com/akbarpn136/aerofoil/commit/f20639a210a27dbcdd9aabcf3cf07b2ca2223d0d}}.
 
   \pause
 
@@ -60,6 +60,16 @@
       \end{figure}
     \end{column}
   \end{columns}
+\end{frame}
+
+\begin{frame}{Koreksi Bug Rotasi SDF Airfoil}
+  Penggunaan argumen fungsi \textit{warpAffine} di OpenCV sudah diperbaiki\footnote{\url{https://github.com/akbarpn136/aerofoil/pull/10/commits/6b2cbc11bf748381a9f6177456362794eb791a24}}.
+
+   \begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{statics/bug_rotasi}
+    \caption{Setelah koreksi}
+  \end{figure}
 \end{frame}
 
 \subsection{Telaah Literatur}
