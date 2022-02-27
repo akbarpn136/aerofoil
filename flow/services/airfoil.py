@@ -5,10 +5,13 @@ import skfmm
 import base64
 import numpy as np
 import pandas as pd
+from PIL import Image
 from django.conf import settings
 from rest_framework import status
 from matplotlib import pyplot as plt
 from django.http import JsonResponse
+
+from flow.services.predict import get_prediction
 
 
 class AirfoilGenerator:
@@ -62,13 +65,16 @@ class AirfoilGenerator:
         if save:
             name = filename if filename else "airfoil"
             curr_dir = settings.PUBLIC_DIR
-            save_path = os.path.join(curr_dir, "public", "media", "airfoil", f"{name}.png")
-            plt.savefig(save_path, bbox_inches="tight", pad_inches=0)
+            save_path = os.path.join(curr_dir, "public", "media", "airfoil", f"{name}.jpg")
+            plt.savefig(save_path, bbox_inches="tight", pad_inches=0, dpi=34.7)
 
             return None
         else:
             flike = io.BytesIO()
-            plt.savefig(flike, bbox_inches="tight", pad_inches=0)
+            plt.savefig(flike, bbox_inches="tight", pad_inches=0, dpi=34.7)
+            image = Image.open(flike)
+            image = image.convert("RGB")
+            get_prediction(image)
 
             return base64.b64encode(flike.getvalue()).decode()
 
@@ -92,10 +98,10 @@ class AirfoilGenerator:
             coords = df.to_dict("records")
 
             ori = AirfoilGenerator.sdf_image(angle, pixels, 2, coords, gen_sdf=False)
-            img = AirfoilGenerator.sdf_image(angle, pixels, 2, coords, gen_sdf=True)
+            sdf = AirfoilGenerator.sdf_image(angle, pixels, 2, coords, gen_sdf=True)
 
             return JsonResponse(
-                {"data": {"ori": ori, "sdf": img}},
+                {"data": {"ori": ori, "sdf": sdf}},
                 status=status.HTTP_200_OK
             )
 
