@@ -74,9 +74,9 @@ class AirfoilGenerator:
             plt.savefig(flike, bbox_inches="tight", pad_inches=0, dpi=34.7)
             image = Image.open(flike)
             image = image.convert("RGB")
-            get_prediction(image)
+            pred = get_prediction(image)
 
-            return base64.b64encode(flike.getvalue()).decode()
+            return base64.b64encode(flike.getvalue()).decode(), pred
 
     @staticmethod
     def parse_input(points_input, angle, pixels):
@@ -97,11 +97,11 @@ class AirfoilGenerator:
 
             coords = df.to_dict("records")
 
-            ori = AirfoilGenerator.sdf_image(angle, pixels, 2, coords, gen_sdf=False)
-            sdf = AirfoilGenerator.sdf_image(angle, pixels, 2, coords, gen_sdf=True)
+            ori, _ = AirfoilGenerator.sdf_image(angle, pixels, 2, coords, gen_sdf=False)
+            sdf, pred = AirfoilGenerator.sdf_image(angle, pixels, 2, coords, gen_sdf=True)
 
             return JsonResponse(
-                {"data": {"ori": ori, "sdf": sdf}},
+                {"data": {"ori": ori, "sdf": sdf, "pred": pred.tolist()}},
                 status=status.HTTP_200_OK
             )
 
