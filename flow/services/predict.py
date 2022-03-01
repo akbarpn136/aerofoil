@@ -78,4 +78,6 @@ def get_prediction(img=None):
         pred = model(img)
         pred = pred.detach().cpu().numpy() * 0.5 + 0.5  # Denormalize
 
-        print(pred[0])
+        return pred[0]
+
+    return [0, 0, 0]
