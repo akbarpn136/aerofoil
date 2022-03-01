@@ -1,6 +1,7 @@
-export function foilMutation(state, {ori, sdf}) {
+export function foilMutation(state, {ori, sdf, pred}) {
   state.foil.ori = ori
   state.foil.sdf = sdf
+  state.foil.pred = pred
 }
 
 export function koleksiAirfoilMutation(state, {count, next, previous, results}) {
