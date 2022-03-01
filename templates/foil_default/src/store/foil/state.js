@@ -1,6 +1,6 @@
 export default function () {
   return {
-    foil: { ori: "", sdf: "" },
+    foil: { ori: "", sdf: "", pred: [] },
     koleksi: {
       count: 0,
       next: null,
