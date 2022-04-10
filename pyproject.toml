@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "aerofoil"
+version = "1.0.0"
+description = "Web-based applications to help users in predicting aerodynamic coefficients of airfoils"
+authors = ["Arizal Akbar Zikri <akbarpn136@gmail.com>"]
+license = "Apache-2.0 License"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.75.1"
+uvicorn = {extras = ["standard"], version = "^0.17.6"}
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
