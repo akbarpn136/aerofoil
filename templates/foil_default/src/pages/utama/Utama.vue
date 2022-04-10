@@ -30,6 +30,25 @@
       </div>
     </div>
 
+    <div class="q-mb-md" v-if="tunjukGambar">
+      <q-markup-table separator="cell" flat bordered>
+        <thead>
+          <tr class="text-bold">
+            <th class="text-center">Prediksi Cl</th>
+            <th class="text-center">Prediksi Cd</th>
+            <th class="text-center">Prediksi Cm</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center">{{ gambarAirfoil["pred"][0] }}</td>
+            <td class="text-center">{{ gambarAirfoil["pred"][1] }}</td>
+            <td class="text-center">{{ gambarAirfoil["pred"][2] }}</td>
+          </tr>
+        </tbody>
+      </q-markup-table>
+    </div>
+
     <q-form
       ref="airfoilForm"
       @submit="onProsesKoordinat"

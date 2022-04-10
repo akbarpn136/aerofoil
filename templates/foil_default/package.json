@@ -12,17 +12,19 @@
   },
   "dependencies": {
     "@quasar/cli": "^1.2.2",
-    "@quasar/extras": "^1.11.4",
+    "@quasar/extras": "^1.12.5",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "dotenv": "^10.0.0",
     "plotly.js-dist": "^2.5.1",
-    "quasar": "^2.3.0",
+    "quasar": "^2.5.5",
+    "vue": "^3.2.31",
+    "vue-router": "^4.0.12",
     "vuex": "^4.0.1"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",
-    "@quasar/app": "^3.1.10",
+    "@quasar/app": "^3.3.3",
     "eslint": "^7.14.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-vue": "^7.0.0",

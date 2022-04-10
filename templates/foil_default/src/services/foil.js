@@ -5,7 +5,7 @@ export const foilService = async (form, store, {sudut, koordinat}) => {
     await form.value.validate()
     const res = await store.dispatch("foil/foilAction", {sudut, koordinat})
 
-    store.commit("foil/foilMutation", {ori: res.data.data.ori, sdf: res.data.data.sdf})
+    store.commit("foil/foilMutation", {ori: res.data.data.ori, sdf: res.data.data.sdf, pred: res.data.data.pred})
   } catch (err) {
     let message
 

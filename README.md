@@ -15,6 +15,10 @@ REST_HOST=localhost:8000  #ui
 SOURCE_CODE=github.com    #ui
 ```
 
+Disamping file ```.env```, perlu juga mempersiapkan model hasil latih **aerocnn.pt** ke dalam
+direktori statik django ```settings.STATIC_ROOT/cnn/aerocnn.pt```. Model **aerocnn.pt** dapat
+diambil melalui tautan rilis.
+
 Jalankan perintah `pip install -r requirements.txt` untuk menambahkan _package dependencies_
 yang diperlukan di dalam _root_ direktori. Yakinkan [Python](https://www.python.org/) sudah terpasang di sistem operasi.
 
