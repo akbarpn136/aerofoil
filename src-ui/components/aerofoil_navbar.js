@@ -3,12 +3,20 @@ import {
     Flex,
     Link,
     HStack,
+    Button,
     VStack,
     Heading,
     IconButton,
+    useColorMode,
     useDisclosure,
+    useColorModeValue,
 } from "@chakra-ui/react"
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons"
+import {
+    SunIcon,
+    MoonIcon,
+    CloseIcon,
+    HamburgerIcon,
+} from "@chakra-ui/icons"
 
 const NavLink = (props) => (
     <Link
@@ -27,10 +35,11 @@ const NavLink = (props) => (
 export default function Simple() {
     const links = ["Tools", "Datasets"]
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const { colorMode, toggleColorMode } = useColorMode()
 
     return (
         <div>
-            <Box bg="teal.700" color="white" px={4} boxShadow="md">
+            <Box bg={useColorModeValue("teal.500", "teal.700")} color="white" px={4} boxShadow="md">
                 <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
                     <Heading as="h2" size="md" textShadow="1px 1px black">
                         ✈️ AEROFOIL
@@ -39,10 +48,19 @@ export default function Simple() {
                     <HStack
                         as={"nav"}
                         spacing={4}
-                        display={{ base: "none", md: "flex" }}>
+                        display={{ base: "none", md: "flex" }}
+                    >
                         {links.map((link) => (
                             <NavLink key={link} href="#">{link}</NavLink>
                         ))}
+
+                        <Button
+                            onClick={toggleColorMode}
+                            bg={useColorModeValue("teal.500", "teal.700")}
+                            rounded="full"
+                        >
+                            {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+                        </Button>
                     </HStack>
 
                     <IconButton
