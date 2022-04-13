@@ -15,6 +15,7 @@ export default function AerofoilToggleLight() {
         onClick={toggleColorMode}
         bg={useColorModeValue("gray.50", "gray.700")}
         rounded="full"
+        variant="outline"
     >
         {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
     </Button>
