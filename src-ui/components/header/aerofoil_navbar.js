@@ -1,7 +1,6 @@
 import {
     Box,
     Flex,
-    Link,
     HStack,
     VStack,
     Heading,
@@ -17,20 +16,6 @@ import {
 import AerofoilNavLink from "./aerofoil_navlink"
 import AerofoilToggleLight from "./aerofoil_togglelight"
 
-const NavLink = (props) => (
-    <Link
-        px={2}
-        py={1}
-        rounded={"md"}
-        _hover={{
-            textDecoration: "none",
-            bg: useColorModeValue("teal.600", "teal.800"),
-        }}
-        href={props.href}>
-        {props.children}
-    </Link>
-)
-
 export default function AerofoilNavbar() {
     const links = [
         { text: "Tools", href: "/" },
@@ -42,7 +27,7 @@ export default function AerofoilNavbar() {
         <div>
             <Box
                 bg={useColorModeValue("gray.50", "gray.700")}
-                px={4} boxShadow="md" position="absolute" w="full"
+                px={4} boxShadow="md" position="fixed" w="full"
             >
                 <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
                     <Heading as="h1" size="lg">
