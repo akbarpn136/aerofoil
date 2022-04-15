@@ -4,9 +4,9 @@ from src.aerofoil.models.geometry import Geometry
 from src.aerofoil.services.processing import ImageProcessing
 
 
-rendering_router = APIRouter()
+render_router = APIRouter()
 
-@rendering_router.post(
+@render_router.post(
     "/render",
     tags=["app"],
     description="This render airfoil geometry representation"
