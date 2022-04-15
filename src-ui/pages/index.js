@@ -1,13 +1,13 @@
 import Head from "next/head"
 import {
-  Box,
+  Flex,
   Container,
   useColorModeValue
 } from "@chakra-ui/react"
 
 import AerofoilFormGeom from "../components/index/aerofoil_formgeom"
 
-export default function Home() {
+export default function Home(props) {
   return (
     <div>
       <Head>
@@ -16,16 +16,23 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Box
+      <Flex
         as="main"
-        py={16}
-        minH="100vh"
+        h="100vh"
+        align="center"
+        justify="center"
         bg={useColorModeValue("gray.100", "gray.800")}
       >
-        <Container maxW="md" mt={25}>
-          <AerofoilFormGeom />
+        <Container w="md">
+          <AerofoilFormGeom backend={props.backend_url} />
         </Container>
-      </Box>
+      </Flex>
     </div>
   )
+}
+
+export async function getStaticProps() {
+  return {props: {
+    backend_url: process.env.BACKEND_URL
+  }}
 }
