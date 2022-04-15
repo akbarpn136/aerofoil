@@ -24,9 +24,11 @@ import {
 import { useState } from "react"
 
 import { getGeom } from "../../services/geom"
+import { getPrediction } from "../../services/predict"
 
 export default function AerofoilFormGeom(props) {
     const [img, setImage] = useState(null)
+    const [prediction, setPrediction] = useState(null)
 
     const validateGeom = (val) => {
         let err
@@ -64,22 +66,22 @@ export default function AerofoilFormGeom(props) {
                 h="146px"
             /> : null}
 
-            <StatGroup w="full" textAlign="center">
+            {prediction ? <StatGroup w="full" textAlign="center">
                 <Stat>
                     <StatLabel>Cl</StatLabel>
-                    <StatNumber>0.25</StatNumber>
+                    <StatNumber>{prediction.data.cl.toFixed(4)}</StatNumber>
                 </Stat>
 
                 <Stat>
                     <StatLabel>Cd</StatLabel>
-                    <StatNumber>0.0023</StatNumber>
+                    <StatNumber>{prediction.data.cd.toFixed(4)}</StatNumber>
                 </Stat>
 
                 <Stat>
                     <StatLabel>Cm</StatLabel>
-                    <StatNumber>-0.0548</StatNumber>
+                    <StatNumber>{prediction.data.cm.toFixed(4)}</StatNumber>
                 </Stat>
-            </StatGroup>
+            </StatGroup> : null}
 
             <Formik
                 initialValues={{
@@ -91,11 +93,16 @@ export default function AerofoilFormGeom(props) {
                     const x = values.x.split(",").map(Number)
                     const y = values.y.split(",").map(Number)
 
-                    const result = await getGeom(props.backend, JSON.stringify({
+                    const geom = await getGeom(props.backend, JSON.stringify({
                         x, y, angle: values.angle
                     }))
 
-                    setImage(result)
+                    const pred = await getPrediction(props.backend, JSON.stringify({
+                        x, y, angle: values.angle
+                    }))
+
+                    setImage(geom)
+                    setPrediction(pred)
                 }}
             >
                 {(props) => {
