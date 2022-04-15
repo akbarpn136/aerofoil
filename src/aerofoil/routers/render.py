@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Body
 
 from src.aerofoil.models.geometry import Geometry
-from src.aerofoil.services.processing import ImageProcessing
+from src.aerofoil.services.process import ImageProcessing
 
 
 render_router = APIRouter()
