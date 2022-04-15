@@ -4,6 +4,7 @@ import skfmm
 import base64
 import matplotlib
 import numpy as np
+from PIL import Image
 from matplotlib import pyplot as plt
 
 
@@ -22,7 +23,7 @@ class ImageProcessing:
     def grayscale(angle: float, px: list[float], py: list[float]):
         placeholder = io.BytesIO()
         pts = np.stack((px, py), axis=1)
-        pts = ImageProcessing._rotate_vector(pts, angle)
+        pts = ImageProcessing._rotate_vector(pts, np.deg2rad(angle))
         x = pts[:, 0]
         y = pts[:, 1]
 
@@ -52,7 +53,7 @@ class ImageProcessing:
 
         return rotated
 
-    def sdf(angle: float, px: list[float], py: list[float]):
+    def sdf(angle: float, px: list[float], py: list[float], prediction: bool = False):
         colormap = "jet"
         dimension = 2
         padding = 110
@@ -88,4 +89,11 @@ class ImageProcessing:
         fig.savefig(placeholder, bbox_inches="tight", pad_inches=0)
         plt.close(fig)
 
-        return f"data:image/jpg;base64,{base64.b64encode(placeholder.getvalue()).decode()}"
+        image = Image.open(placeholder)
+        image = image.convert("RGB")
+
+        if prediction:
+            return image
+
+        else:
+            return f"data:image/jpg;base64,{base64.b64encode(placeholder.getvalue()).decode()}"
